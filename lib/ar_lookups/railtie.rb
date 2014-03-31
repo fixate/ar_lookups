@@ -12,7 +12,7 @@ module ArLookups
 
         # Extend AR base
         ActiveRecord::Base.send :extend,
-          ArLookups::BaseExt
+          ArLookups::ActiveRecordExt
       end
     end
   end

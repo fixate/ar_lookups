@@ -1,5 +1,5 @@
 module ArLookups
-  module BaseExt
+  module ActiveRecordExt
     def ar_lookups
       @ar_lookups ||= superclass.respond_to?(:ar_lookups) ? superclass.ar_lookups.dup : {}
     end
@@ -24,8 +24,9 @@ module ArLookups
       mod.class_eval <<-RUBY, __FILE__, __LINE__ + 1
         def #{column}
           keys = read_attribute(:#{column})
-          return {} if keys.blank?
-          Hash[self.class.ar_lookups[:#{column}].where('#{options[:key_column]} IN (?)', keys).pluck(:#{options[:key_column]}, :#{options[:name_column]})]
+          klass = self.class.ar_lookups[:#{column}]
+          return klass.none if keys.blank?
+          self.class.ar_lookups[:#{column}].where('#{options[:key_column]} IN (?)', keys)#.pluck(:#{options[:key_column]}, :#{options[:name_column]})]
         end
 
         def #{column}_ids
