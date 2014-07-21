@@ -8,7 +8,6 @@
 require 'rails/all'
 require 'rspec'
 require 'rspec/mocks'
-require 'rspec/rails/mocks'
 require 'rspec/autorun'
 
 Dir[File.expand_path('../support/**/*.rb', __FILE__)].each { |f| require f }

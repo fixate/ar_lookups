@@ -9,6 +9,9 @@ class Model < ActiveRecord::Base; end
 
 $ar_count = 0
 describe ArLookups::ActiveRecordExt do
+  # https://github.com/rspec/rspec-rails/commit/8c4fd24f0dd65b44246b6e24d5bd192e08f70fbb
+  pending 'So `mock_model` is gone - going to have to rewrite this when I actually get a second many years from now...'
+
   let(:lookup_relation) { mock_model('Dummy', value: 'Some Val') }
   let(:lookup) do
     mock_model('Lookup', where: lookup_relation, column_defaults: [])
