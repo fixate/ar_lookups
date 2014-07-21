@@ -10,6 +10,11 @@ describe ArLookups::LookupTableDefinition do
     subject.lookup :foo
   end
 
+  it 'creates an custom typed array column with default' do
+    expect(subject).to receive(:string).with(:foo, {array: true, default: []})
+    subject.lookup :foo, type: :string
+  end
+
   it 'merges additional options in preserving array:true' do
     expect(subject).to receive(:integer).with(:foo, {test: 'foobar', array: true, default: []})
     subject.lookup :foo, test: 'foobar'
